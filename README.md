@@ -19,5 +19,7 @@ TODO:
   - [ ] Setting calculation limit
   - [ ] Resume calculation after limit is reached
   - [ ] Get dates update: calculate necessary dates for the interval
+- [ ] Exceptions list
+- [ ] Documentation
 - [ ] Convince jumpinlabs to open source it since it designed to assist
   calendar endpoints :love:
