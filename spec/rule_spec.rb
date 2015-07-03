@@ -5,22 +5,22 @@ describe RRuleParser::Rule do
     describe "FREQ parsing" do
       it "parses FREQ=DAILY;" do
         rule = RRuleParser::Rule.new("RRULE:FREQ=DAILY;COUNT=5")
-        expect(rule.freq).to eq(:day)
+        expect(rule.freq).to eq(:days)
       end
 
       it "parses FREQ=WEEKLY;" do
         rule = RRuleParser::Rule.new("RRULE:FREQ=WEEKLY;COUNT=5")
-        expect(rule.freq).to eq(:week)
+        expect(rule.freq).to eq(:weeks)
       end
 
       it "parses FREQ=MONTHLY;" do
         rule = RRuleParser::Rule.new("RRULE:FREQ=MONTHLY;COUNT=5")
-        expect(rule.freq).to eq(:month)
+        expect(rule.freq).to eq(:months)
       end
 
       it "parses FREQ=YEARLY;" do
         rule = RRuleParser::Rule.new("RRULE:FREQ=YEARLY;COUNT=5")
-        expect(rule.freq).to eq(:year)
+        expect(rule.freq).to eq(:years)
       end
     end
 

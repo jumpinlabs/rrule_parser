@@ -14,11 +14,11 @@ describe RRuleParser::ComputableRule do
     # We start everything on Tue, June 2 2015
     let (:start)  { Time.parse("2015-06-02T03:00:00+03:00") }
     let (:finish) { Time.parse("2015-06-02T04:00:00+03:00") }
+    let (:rule)   { RRuleParser::ComputableRule.new(start, finish, expr) }
 
     describe "DAILY" do
       describe "with 4 occurrencies" do
         let (:expr)   { "RRULE:FREQ=DAILY;COUNT=4" }
-        let (:rule)   { RRuleParser::ComputableRule.new(start, finish, expr) }
 
         it "will produce 4 occurrencies" do
           expect(rule.dates.count).to eq(4)
@@ -35,7 +35,6 @@ describe RRuleParser::ComputableRule do
 
       describe "until Sunday" do
         let (:expr)   { "RRULE:FREQ=DAILY;UNTIL=20150607T120000Z" }
-        let (:rule)   { RRuleParser::ComputableRule.new(start, finish, expr) }
 
         it "will produce 6 occurrencies" do
           expect(rule.dates.count).to eq(6)
@@ -52,7 +51,6 @@ describe RRuleParser::ComputableRule do
 
       describe "each 2 days with 4 occurrencies" do
         let (:expr)   { "RRULE:FREQ=DAILY;INTERVAL=2;COUNT=4" }
-        let (:rule)   { RRuleParser::ComputableRule.new(start, finish, expr) }
 
         it "will produce 4 occurrencies" do
           expect(rule.dates.count).to eq(4)
@@ -69,7 +67,6 @@ describe RRuleParser::ComputableRule do
 
       describe "each 2 days until sunday" do
         let (:expr)   { "RRULE:FREQ=DAILY;INTERVAL=2;UNTIL=20150607T120000Z" }
-        let (:rule)   { RRuleParser::ComputableRule.new(start, finish, expr) }
 
         it "will produce 3 occurrencies" do
           expect(rule.dates.count).to eq(3)
@@ -81,6 +78,58 @@ describe RRuleParser::ComputableRule do
 
         it "last date will be Sat, Jun 6" do
           expect(rule.end.to_date).to eq(Date.new(2015, 6, 6))
+        end
+      end
+    end
+
+    describe "WEEKLY" do
+      describe "every Tuesday with 4 occurrencies" do
+        let (:expr) { "RRULE:FREQ=WEEKLY;COUNT=4;BYDAY=TU" }
+
+        it "will produce 4 occurrencies" do
+          expect(rule.dates.count).to eq(4)
+        end
+
+        it "first date will be Tue, Jun 2" do
+          expect(rule.start.to_date).to eq(Date.new(2015, 6, 2))
+        end
+
+        it "last date will be Tue, Jun 23" do
+          expect(rule.end.to_date).to eq(Date.new(2015, 6, 23))
+        end
+      end
+
+      describe "every Tuesday and Friday with 4 occurrencies" do
+        let (:expr) { "RRULE:FREQ=WEEKLY;COUNT=4;BYDAY=TU,FR" }
+
+        it "will produce 4 occurrencies" do
+          expect(rule.dates.count).to eq(4)
+          puts rule.dates
+        end
+
+        it "first date will be Tue, Jun 2" do
+          expect(rule.start.to_date).to eq(Date.new(2015, 6, 2))
+        end
+
+        it "last date will be Fri, Jun 12" do
+          expect(rule.end.to_date).to eq(Date.new(2015, 6, 12))
+        end
+      end
+
+      describe "every Tuesday with interval of 2 weeks and 3 occurrencies" do
+        let (:expr) { "RRULE:FREQ=WEEKLY;COUNT=3;INTERVAL=2;BYDAY=TU" }
+
+        it "will produce 3 occurrencies" do
+          expect(rule.dates.count).to eq(3)
+          puts rule.dates
+        end
+
+        it "first date will be Tue, Jun 2" do
+          expect(rule.start.to_date).to eq(Date.new(2015, 6, 2))
+        end
+
+        it "last date will be Fri, Jun 30" do
+          expect(rule.end.to_date).to eq(Date.new(2015, 6, 30))
         end
       end
     end

@@ -41,13 +41,13 @@ module RRuleParser
     def parse_freq
       @freq = case @parsed_rule["FREQ"]
       when "DAILY"
-        :day
+        :days
       when "WEEKLY"
-        :week
+        :weeks
       when "MONTHLY"
-        :month
+        :months
       when "YEARLY"
-        :year
+        :years
       end
     end
 
