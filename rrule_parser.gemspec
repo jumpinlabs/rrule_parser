@@ -5,7 +5,7 @@ require 'rrule_parser/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "rrule_parser"
-  spec.version       = RruleParser::VERSION
+  spec.version       = RRuleParser::VERSION
   spec.authors       = ["Seva Rybakov"]
   spec.email         = ["jumpincode@gmail.com"]
 

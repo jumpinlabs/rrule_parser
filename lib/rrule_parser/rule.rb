@@ -23,7 +23,7 @@ module RRuleParser
     end
 
     def is_endless?
-      !!(@until || @count)
+      !(@until || @count)
     end
 
     protected
@@ -41,13 +41,13 @@ module RRuleParser
     def parse_freq
       @freq = case @parsed_rule["FREQ"]
       when "DAILY"
-        :daily
+        :day
       when "WEEKLY"
-        :weekly
+        :week
       when "MONTHLY"
-        :monthly
+        :month
       when "YEARLY"
-        :yearly
+        :year
       end
     end
 
