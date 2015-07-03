@@ -1,6 +1,6 @@
 # RRuleParser
 
-This gem allows you to parse RRULE expressions as defined in RFC
+This gem allows you to parse RRULE expressions as defined in RFC #2445
 
 TODO:
 
