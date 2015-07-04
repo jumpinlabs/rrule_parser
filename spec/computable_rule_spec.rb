@@ -254,9 +254,7 @@ describe RRuleParser::ComputableRule do
       let (:expr)   { "RRULE:FREQ=WEEKLY;COUNT=999999;BYDAY=MO,TU,FR" }
 
       it "will produce 1000 occurrencies" do
-        t1 = Time.now
         expect(rule.dates.count).to eq(1000)
-        puts Time.now - t1
       end
     end
   end

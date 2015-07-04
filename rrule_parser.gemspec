@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Seva Rybakov"]
   spec.email         = ["jumpincode@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = "RFC 2445 RRULE parsing"
+  spec.description   = "Creates list of dates range of RFC 2445 RRULE and a start date"
+  spec.homepage      = "https://github.com/jumpinlabs/rrule_parser"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
