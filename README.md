@@ -6,14 +6,14 @@ TODO:
 
 - [x] Parsing RRULE format
 - [x] Events with defined COUNT or UNTIL
-- [x] Events with intervals
+- [x] Events with end
   - [x] Calculation of DAILY
   - [x] Calculation of interval start
   - [x] Calculation of interval end
-  - [ ] Calculation of WEEKLY with given set of DOWs
-  - [ ] Calculation of MONTHLY with given DAY number
+  - [x] Calculation of WEEKLY with given set of DOWs
+  - [x] Calculation of MONTHLY with given DAY number
   - [ ] Calculation of MONTHLY with given WEEKNO and DOW (e.g each second Monday)
-  - [ ] Calculation of YEARLY
+  - [x] Calculation of YEARLY
 - [ ] Get dates that fit into selected range
 - [ ] Calculation of endless events
   - [ ] Setting calculation limit
