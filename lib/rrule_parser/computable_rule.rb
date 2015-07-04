@@ -14,12 +14,13 @@ module RRuleParser
       sunday: 7
     }
 
-    def initialize(start, finish, rule)
+    def initialize(start, finish, rule, max_count=1000)
       super(rule)
       @start = start
       @finish = finish
       @duration = finish - start
-      calc_dates unless is_endless?
+      @max_count = max_count
+      calc_dates
     end
 
     def start
@@ -74,10 +75,13 @@ module RRuleParser
     end
 
     def calc_stop_condition
+      return false if @dates.size == @max_count
       if count
         @dates.size != count
       elsif self.until
         @current_date < self.until
+      else
+        @dates.size != @max_count
       end
     end
   end

@@ -33,6 +33,22 @@ describe RRuleParser::ComputableRule do
         end
       end
 
+      describe "with 1 occurrence" do
+        let (:expr)   { "RRULE:FREQ=DAILY;COUNT=1" }
+
+        it "will produce 1 occurrencies" do
+          expect(rule.dates.count).to eq(1)
+        end
+
+        it "first date will be Tue, Jun 2" do
+          expect(rule.start.to_date).to eq(Date.new(2015, 6, 2))
+        end
+
+        it "last date will be Tue, Jun 2" do
+          expect(rule.end.to_date).to eq(Date.new(2015, 6, 2))
+        end
+      end
+
       describe "until Sunday" do
         let (:expr)   { "RRULE:FREQ=DAILY;UNTIL=20150607T120000Z" }
 
@@ -215,6 +231,32 @@ describe RRuleParser::ComputableRule do
         it "last date will be Jun 2 2018" do
           expect(rule.end.to_date).to eq(Date.new(2018, 6, 2))
         end
+      end
+    end
+
+    describe "unlimited" do
+      let (:expr) { "RRULE:FREQ=DAILY" }
+
+      it "will produce 1000 occurrencies by default" do
+        expect(rule.dates.count).to eq(1000)
+      end
+    end
+
+    describe "limited with end date far in the future" do
+      let (:expr)   { "RRULE:FREQ=DAILY;UNTIL=29991212T120000Z" }
+
+      it "will produce 1000 occurrencies" do
+        expect(rule.dates.count).to eq(1000)
+      end
+    end
+
+    describe "limited with really big count" do
+      let (:expr)   { "RRULE:FREQ=WEEKLY;COUNT=999999;BYDAY=MO,TU,FR" }
+
+      it "will produce 1000 occurrencies" do
+        t1 = Time.now
+        expect(rule.dates.count).to eq(1000)
+        puts Time.now - t1
       end
     end
   end
