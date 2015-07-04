@@ -104,7 +104,6 @@ describe RRuleParser::ComputableRule do
 
         it "will produce 4 occurrencies" do
           expect(rule.dates.count).to eq(4)
-          puts rule.dates
         end
 
         it "first date will be Tue, Jun 2" do
@@ -121,15 +120,100 @@ describe RRuleParser::ComputableRule do
 
         it "will produce 3 occurrencies" do
           expect(rule.dates.count).to eq(3)
-          puts rule.dates
         end
 
         it "first date will be Tue, Jun 2" do
           expect(rule.start.to_date).to eq(Date.new(2015, 6, 2))
         end
 
-        it "last date will be Fri, Jun 30" do
+        it "last date will be Tue, Jun 30" do
           expect(rule.end.to_date).to eq(Date.new(2015, 6, 30))
+        end
+      end
+
+      describe "every Monday and Tuesday with interval of 2 weeks and 6 occurrencies" do
+        let (:expr) { "RRULE:FREQ=WEEKLY;COUNT=6;INTERVAL=2;BYDAY=MO,TU" }
+
+        it "will produce 6 occurrencies" do
+          expect(rule.dates.count).to eq(6)
+        end
+
+        it "first date will be Tue, Jun 2" do
+          expect(rule.start.to_date).to eq(Date.new(2015, 6, 2))
+        end
+
+        it "last date will be Mon, July 13" do
+          expect(rule.end.to_date).to eq(Date.new(2015, 7, 13))
+        end
+      end
+
+      describe "every Monday and Tuesday with interval of 2 weeks and ending June 16" do
+        let (:expr) { "RRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20150630T120000Z;BYDAY=MO,TU" }
+
+        it "will produce 5 occurrencies" do
+          expect(rule.dates.count).to eq(5)
+        end
+
+        it "first date will be Tue, Jun 2" do
+          expect(rule.start.to_date).to eq(Date.new(2015, 6, 2))
+        end
+
+        it "last date will be Mon, June 30" do
+          expect(rule.end.to_date).to eq(Date.new(2015, 6, 30))
+        end
+      end
+    end
+
+    describe "Monthly calculations" do
+      describe "every month at 2nd day of month with 4 occurrencies" do
+        let (:expr) { "RRULE:FREQ=MONTHLY;COUNT=4" }
+
+        it "will produce 4 occurrencies" do
+          expect(rule.dates.count).to eq(4)
+        end
+
+        it "first date will be Tue, Jun 2" do
+          expect(rule.start.to_date).to eq(Date.new(2015, 6, 2))
+        end
+
+        it "last date will be Sep 2" do
+          expect(rule.end.to_date).to eq(Date.new(2015, 9, 2))
+        end
+      end
+
+      describe "every month at 2nd day of month with interval of 2 and 4 occurrencies" do
+        let (:expr) { "RRULE:FREQ=MONTHLY;INTERVAL=2;COUNT=4" }
+
+        it "will produce 4 occurrencies" do
+          expect(rule.dates.count).to eq(4)
+        end
+
+        it "first date will be Tue, Jun 2" do
+          expect(rule.start.to_date).to eq(Date.new(2015, 6, 2))
+        end
+
+        it "last date will be Dec 2" do
+          expect(rule.end.to_date).to eq(Date.new(2015, 12, 2))
+        end
+      end
+
+      describe "Given day of month does not work yet" do
+      end
+    end
+
+    describe "Yearly calculations" do
+      describe "every year at Jun 2 with 4 occurrencies" do
+        let (:expr) { "RRULE:FREQ=YEARLY;COUNT=4" }
+        it "will produce 4 occurrencies" do
+          expect(rule.dates.count).to eq(4)
+        end
+
+        it "first date will be Jun 2 2015" do
+          expect(rule.start.to_date).to eq(Date.new(2015, 6, 2))
+        end
+
+        it "last date will be Jun 2 2018" do
+          expect(rule.end.to_date).to eq(Date.new(2018, 6, 2))
         end
       end
     end

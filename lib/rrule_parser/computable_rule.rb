@@ -50,7 +50,6 @@ module RRuleParser
       ix = dows.index(start.wday) || 0
 
       begin
-        puts @current_date
         @dates << @current_date
 
         prev_dow = dows[ix]

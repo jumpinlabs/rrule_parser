@@ -92,17 +92,17 @@ describe RRuleParser::Rule do
     describe "#is_endless?" do
       it "is true if COUNT given" do
         rule = RRuleParser::Rule.new("RRULE:FREQ=WEEKLY;COUNT=10")
-        expect(rule.is_endless?).to be_true
+        expect(rule.is_endless?).to be_falsy
       end
 
       it "is true if UNTIL given" do
         rule = RRuleParser::Rule.new("RRULE:FREQ=WEEKLY;UNTIL=20160101T080000Z")
-        expect(rule.is_endless?).to be_true
+        expect(rule.is_endless?).to be_falsy
       end
 
-      it "is false otherwise" do
+      it "is true otherwise" do
         rule = RRuleParser::Rule.new("RRULE:FREQ=WEEKLY;BYDAY=SA,SU")
-        expect(rule.is_endless?).to be_false
+        expect(rule.is_endless?).to be_truthy
       end
     end
   end
