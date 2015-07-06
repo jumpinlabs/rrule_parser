@@ -258,4 +258,26 @@ describe RRuleParser::ComputableRule do
       end
     end
   end
+
+  describe "calculations for Sun, July 12, 2015" do
+    let (:start)  { Time.parse("2015-07-12T03:00:00+03:00") }
+    let (:finish) { Time.parse("2015-07-12T05:00:00+03:00") }
+    let (:rule)   { RRuleParser::ComputableRule.new(start, finish, expr) }
+
+    describe "Weekly on SU and SA ending August 1 2015" do
+      let(:expr) { "RRULE:FREQ=WEEKLY;UNTIL=20150801T000000Z;BYDAY=SU,SA"}
+
+      it "first date will be July 12 2015" do
+        expect(rule.start.to_date).to eq(Date.new(2015, 7, 12))
+      end
+
+      it "second date will be July 18 2015" do
+        expect(rule.dates[1].to_date).to eq(Date.new(2015, 7, 18))
+      end
+
+      it "last date will be Aug 1 2015" do
+        expect(rule.start.to_date).to eq(Date.new(2015, 7, 12))
+      end
+    end
+  end
 end
