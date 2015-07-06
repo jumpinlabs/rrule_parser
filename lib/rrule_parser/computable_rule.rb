@@ -79,7 +79,7 @@ module RRuleParser
       if count
         @dates.size != count
       elsif self.until
-        @current_date < self.until
+        @current_date <= self.until
       else
         @dates.size != @max_count
       end
