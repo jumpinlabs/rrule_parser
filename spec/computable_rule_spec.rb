@@ -275,6 +275,10 @@ describe RRuleParser::ComputableRule do
         expect(rule.dates[1].to_date).to eq(Date.new(2015, 7, 18))
       end
 
+      it "third date will be July 19 2015" do
+        expect(rule.dates[2].to_date).to eq(Date.new(2015, 7, 19))
+      end
+
       it "last date will be Aug 1 2015" do
         expect(rule.start.to_date).to eq(Date.new(2015, 7, 12))
       end

@@ -80,6 +80,9 @@ module RRuleParser
             puts "WARN: by weekday of month is not supported yet"
           end
         end
+      elsif @parsed_rule["WKST"]
+        day = @parsed_rule["WKST"]
+        @by_day = [DAY_MAP[day]]
       end
     end
   end
